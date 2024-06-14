@@ -5,13 +5,13 @@
     </div>
 
     <div class="content" v-else ref="content">
-      <h1>乾隆仿古款青玉仿古铜纹出戟斜方斛</h1>
+      <h1>乾隆款团花纹六方瓶</h1>
       <img
         v-if="!loading"
-        src="../../assets/china_img/乾隆仿古款青玉仿古铜纹出戟斜方斛（玉石）.png"
+        src="../../assets/china_img/乾隆款画珐琅团花纹六方瓶（珐琅）.png"
         alt="Image"
       />
-      <p v-if="!loading">Content loaded after progress reaches 100%</p>
+      <p v-if="!loading">一握和阗玉，琢为司寇匜。率因从古朴，非所论时宜。韭绿犹余润，粟黄徒讶奇。四方永作枯，博古式铭词。</p>
     </div>
   </div>
 </template>

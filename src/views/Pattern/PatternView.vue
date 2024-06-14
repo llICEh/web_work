@@ -1,3 +1,3 @@
 <template>
-  <div>PatternPage</div>
+  <div>PatternView</div>
 </template>

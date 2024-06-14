@@ -98,11 +98,13 @@
     </div>
     <div class="section">
       <div class="finalpage_container">
-        <!-- <div class="block">
-          <span class="demonstration">区分颜色</span>
+        <div class="text-box" v-show="showText">
+          <p>此乃终页，观者谢过，愿君安康，岁岁平安</p>
+        </div>
+        <div class="rating-box" v-show="showRating">
           <el-rate v-model="value2" :colors="colors"> </el-rate>
-        </div> -->
-        <div class="box" style="width: 800px; height: 80%; margin-top: 100px; margin-left: 100px">
+        </div>
+        <div style="margin-top: 20px">
           <CommentBox />
         </div>
       </div>
@@ -113,20 +115,30 @@
 import fullpage from 'fullpage.js'
 import 'fullpage.js/dist/fullpage.css' // 导入 CSS
 import CommentBox from '@/components/CommentBox.vue'
+
 export default {
   name: 'MainView',
   components: {
     CommentBox
   },
-  //   data() {
-  //     return {
-  //       value2: null,
-  //       colors: ['#99A9BF', '#F7BA2A', '#FF9900'] // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
-  //     }
-  //   },
+  data() {
+    return {
+      showText: false, // 控制文本显示的变量
+      showRating: false, // 控制打分组件显示的变量
+      value2: null,
+      colors: ['#99A9BF', '#F7BA2A', '#FF9900'] // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
+    }
+  },
   mounted() {
     this.initFullPage()
     this.getVideoTime()
+    setTimeout(() => {
+      this.showText = true // 延迟显示文本
+    }, 500) // 延迟500毫秒
+
+    setTimeout(() => {
+      this.showRating = true // 在文本显示后延迟显示打分组件
+    }, 2000) // 延迟2000毫秒
   },
   methods: {
     toPatternPage() {
@@ -149,6 +161,7 @@ export default {
         path: '/color'
       })
     },
+
     initFullPage() {
       this.$nextTick(() => {
         new fullpage('#fullpage', {
@@ -272,13 +285,43 @@ body {
 }
 
 .finalpage_container {
+  position: relative;
   display: flex;
   width: 100%;
+  flex-direction: column;
   background-image: url('@/assets/s5bebbfc0524a4.jpg');
   background-size: cover;
   background-position: center;
   margin: 0;
   height: 100vh;
+  align-items: center; /* 水平居中 */
+  justify-content: center; /* 垂直居中 */
+}
+.text-box {
+  font-size: 96px;
+  font-family: FangSong;
+  /* transition: opacity 20s ease; 文本渐变效果 */
+}
+
+.rating-box {
+  margin-top: 20px; /* 与文本保持一定距离 */
+
+  /* transition: opacity 20s ease; 打分组件渐变效果 */
+}
+.el-button.is-plain {
+  --el-button-hover-text-color: #3f5467;
+  --el-button-hover-bg-color: var(--el-fill-color-blank);
+  --el-button-hover-border-color: #3c5164;
+}
+.el-button {
+  --el-button-active-border-color: #3e5366;
+  font-size: 32px;
+  height: 60px;
+  width: 150px;
+  border-radius: 20px;
+}
+.el-rate__icon {
+  font-size: 80px !important; /* 增大字体大小 */
 }
 .image-container {
   position: relative;
@@ -297,6 +340,19 @@ body {
   /* 动画结束时停留在最后一帧 */
 }
 
+.el-dialog {
+  --el-dialog-bg-color: #461d1f;
+  background: var(--el-dialog-bg-color);
+}
+.rating-comment-box[data-v-f49b2b07] {
+  border: 1px solid #dcdfe6;
+  background-color: #dbd3d3;
+}
+.el-button--primary {
+  --el-button-bg-color: #461d1f;
+  --el-button-border-color: #461d1f;
+  --el-button-active-color: #461d1f;
+}
 .top-image {
   width: 60%;
   /* 调整为需要的宽度 */

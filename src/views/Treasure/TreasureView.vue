@@ -30,7 +30,7 @@ export default {
           text: '玉石'
         },
         {
-          src: '../src/assets/china_img/乾隆款画珐琅团花纹六方瓶（珐琅）.png',
+          src: '../src/assets/china_img/景泰款掐丝珐琅缠枝莲纹尊（珐琅）.png',
           alt: 'Image 3',
           to: '/china',
           text: '珐琅'

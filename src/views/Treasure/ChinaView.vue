@@ -25,9 +25,9 @@ export default {
       boxes: [
         {
           link: '/load',
-          imageSrc: '../src/assets/china_img/乾隆款松石绿地粉彩红蝠纹葫芦式三孔瓶（陶瓷）.png',
+          imageSrc: '../src/assets/china_img/乾隆款画珐琅团花纹六方瓶（珐琅）.png',
           imageAlt: 'Image 1',
-          text: '乾隆款松石绿地粉彩红蝠纹葫芦式三孔瓶'
+          text: '乾隆款团花纹六方瓶'
         },
         {
           link: '/load2',

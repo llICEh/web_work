@@ -1,100 +1,126 @@
 <template>
-  <div class="rating-comment-box">
-    <div class="rating-section">
-      <el-rate v-model="rating" />
-    </div>
-    <div class="comment-input-section">
-      <el-input
-        type="textarea"
-        v-model="newComment"
-        placeholder="输入评论..."
-        rows="4"
-        maxlength="200"
-        show-word-limit
-      />
-      <el-button style="margin-top: 10px" type="primary" @click="submitComment">发表评论</el-button>
-    </div>
-    <div class="comments-section">
-      <el-scrollbar class="comments-scrollbar">
-        <div v-for="(comment, index) in comments" :key="index" class="comment">
-          <div class="comment-header">
-            <el-avatar :src="comment.avatar" />
-            <span class="comment-name">{{ comment.name }}</span>
-            <span class="comment-time">{{ comment.time }}</span>
+  <el-button plain @click="scrollToBottomAndShowDialog"> 留言 </el-button>
+  <el-dialog v-model="dialogFormVisible" title="留言区" width="875">
+    <div class="rating-comment-box">
+      <div class="comments-section">
+        <el-scrollbar class="comments-scrollbar">
+          <div v-for="(comment, index) in comments" :key="index" class="comment">
+            <div class="comment-header">
+              <el-avatar :src="comment.avatar" />
+              <span class="comment-name">{{ comment.name }}</span>
+              <span class="comment-time">{{ comment.time }}</span>
+            </div>
+            <div class="comment-body">{{ comment.text }}</div>
           </div>
-          <div class="comment-body">{{ comment.text }}</div>
-        </div>
-      </el-scrollbar>
+        </el-scrollbar>
+      </div>
+      <div class="comment-input-section">
+        <el-input
+          type="textarea"
+          v-model="newComment"
+          placeholder="输入评论..."
+          rows="4"
+          maxlength="200"
+          show-word-limit
+        />
+        <el-button style="margin-top: 10px" type="primary" @click="submitComment"
+          >发表评论</el-button
+        >
+      </div>
     </div>
-  </div>
+  </el-dialog>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      rating: 0,
+      dialogFormVisible: false,
       newComment: '',
       comments: [
-        // Example comments
         {
           name: 'User1',
-          avatar: 'https://example.com/avatar1.png',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-04 10:00',
           text: 'This is a comment.'
         },
         {
           name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User3',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User4',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User5',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User6',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User7',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User8',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         },
         {
-          name: 'User2',
-          avatar: 'https://example.com/avatar2.png',
+          name: 'User9',
+          avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
           time: '2024-06-03 09:00',
           text: 'This is another comment.'
         }
       ]
     }
   },
+
   methods: {
+    scrollToBottomAndShowDialog() {
+      // 使用 Vue.nextTick() 确保页面已经更新完毕
+      this.$nextTick(() => {
+        // 获取最后一个 section 的位置
+        const lastSection = document.querySelector('.finalpage_container:last-of-type')
+        const lastSectionRect = lastSection.getBoundingClientRect()
+
+        // 计算页面底部的位置
+        const pageBottom = window.scrollY + window.innerHeight
+
+        // 如果最后一个 section 在页面底部以下，即页面滚动到最底部，显示评论框
+        if (lastSectionRect.top < pageBottom) {
+          // 显示评论框
+          this.dialogFormVisible = true
+        } else {
+          // 如果最后一个 section 不在页面底部以下，则滚动页面到最后一个 section 并显示评论框
+          window.scrollTo({
+            top: lastSection.offsetTop,
+            behavior: 'smooth' // 可以添加滚动动画
+          })
+          this.dialogFormVisible = true
+        }
+      })
+    },
     submitComment() {
       if (this.newComment.trim() === '') {
         this.$message({
@@ -107,7 +133,7 @@ export default {
 
       const newComment = {
         name: 'CurrentUser', // Replace with actual user data
-        avatar: 'https://example.com/current-avatar.png', // Replace with actual user avatar
+        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png', // Replace with actual user avatar
         time: new Date().toLocaleString(),
         text: this.newComment
       }
@@ -118,12 +144,22 @@ export default {
   }
 }
 </script>
-
 <style scoped>
+.el-dialog__wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
+.el-dialog {
+  /* 确保对话框不会超出屏幕 */
+  max-width: 100%;
+  margin: 0;
+}
 .rating-comment-box {
   width: 800px;
-  height: 800px;
+  height: 700px;
   padding: 20px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
@@ -136,6 +172,7 @@ export default {
 }
 
 .comment-input-section {
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
