@@ -320,6 +320,22 @@ body {
   width: 150px;
   border-radius: 20px;
 }
+.el-button--primary {
+    --el-button-outline-color: #461d1f;
+    --el-button-hover-link-text-color: #461d1f;
+    --el-button-hover-bg-color: #a98989;
+    --el-button-hover-border-color: #461d1f;
+    --el-button-active-bg-color: #dbd3d3;
+    --el-button-disabled-bg-color: #dbd3d3;
+}
+.el-dialog__title {
+    color: #ffffff;
+    font-size: 25px;
+    line-height: var(--el-dialog-font-line-height);
+}
+.el-dialog {
+    --el-dialog-margin-top: 10vh;
+}
 .el-rate__icon {
   font-size: 80px !important; /* 增大字体大小 */
 }
